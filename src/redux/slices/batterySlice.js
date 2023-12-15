@@ -6,7 +6,6 @@ export const fetchBatteryData = createAsyncThunk(
     const response = await fetch("https://dev.electorq.com/dummy/battery");
     const batteryData = await response.json();
     const data = JSON.parse(batteryData.body);
-
     return data;
   }
 );
