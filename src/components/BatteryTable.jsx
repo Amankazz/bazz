@@ -1,30 +1,40 @@
 import React from "react";
+import "../index.css";
 
-const BatteryTable = ({ data, searchTerm }) => {
-  const filteredData = data.filter(
-    (item) =>
-      String(item.id).toLowerCase().includes(searchTerm.toLowerCase()) ||
-      String(item.soc).toLowerCase().includes(searchTerm.toLowerCase()) ||
-      String(item.imei).toLowerCase().includes(searchTerm.toLowerCase()) ||
-      String(item.owner).toLowerCase().includes(searchTerm.toLowerCase())
-  );
+const BatteryTable = ({ data, paginatedData }) => {
   return (
     <table>
       <thead>
-        <tr>
-          <th>Battery ID</th>
-          <th>SOC</th>
-          <th>IMEI</th>
-          <th>Current Owner</th>
+        <tr className="table-header">
+          <th className="header__item" scope="col">
+            Battery ID
+          </th>
+          <th className="header__item" scope="col">
+            SOC
+          </th>
+          <th className="header__item" scope="col">
+            IMEI
+          </th>
+          <th className="header__item" scope="col">
+            Current Owner
+          </th>
         </tr>
       </thead>
       <tbody>
-        {filteredData.map((battery) => (
-          <tr key={battery.id}>
-            <td>{battery.id}</td>
-            <td>{battery.soc}</td>
-            <td>{battery.imei}</td>
-            <td>{battery.owner}</td>
+        {paginatedData.map((battery) => (
+          <tr className="table-row" key={battery.id}>
+            <td className="table-data" data-label="Battery id" scope="row">
+              {battery.id}
+            </td>
+            <td className="table-data" data-label="SOC">
+              {battery.soc}
+            </td>
+            <td className="table-data" data-label="IMEI">
+              {battery.imei}
+            </td>
+            <td className="table-data" data-label="Current Owner">
+              {battery.owner}
+            </td>
           </tr>
         ))}
       </tbody>

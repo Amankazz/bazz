@@ -1,16 +1,28 @@
 import React, { useState } from "react";
+// import "../style.css";
+import "../index.css";
+import { FaSearch } from "react-icons/fa";
 
 const SearchBar = ({ searchTerm, handleSearch }) => {
-  //   const [text, setText] = useState("");
+  const [text, setText] = useState("");
+
+  function changeHandler(e) {
+    setText(e.target.value);
+  }
 
   return (
-    <div>
+    <div className="search-box">
       <input
         type="text"
-        className="search-bar"
         placeholder="Search"
-        value={searchTerm}
-        onChange={(e) => handleSearch(e.target.value)}
+        value={text}
+        onChange={(e) => changeHandler(e)}
+      />
+      <FaSearch
+        onClick={() => {
+          handleSearch(text);
+        }}
+        className="search-btn"
       />
     </div>
   );
