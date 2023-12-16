@@ -76,13 +76,10 @@ h1,h2,h3,h4,h5,h6 {
     background-color: hsla(0, 0%, 35%, 0.5);  
     outline: none;
     border: none;
-    cursor: pointer;   
-    transition: all 0.2s ease; 
+    cursor: pointer;       
 }
 
-.search-btn:active{
-    transform: scale(0.06);
-}
+
 
 
 
