@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "../style.css";
 import "../index.css";
 import { FaSearch } from "react-icons/fa";
 

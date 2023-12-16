@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+// fetching data from the api
 export const fetchBatteryData = createAsyncThunk(
   "battery/fetchData",
   async () => {
     try {
       const response = await fetch("https://dev.electorq.com/dummy/battery");
       const batteryData = await response.json();
-      const data = JSON.parse(batteryData.body);
+      const data = JSON.parse(batteryData.body); // parsing array of objects => json object
       return data;
     } catch (error) {
       console.error(error);

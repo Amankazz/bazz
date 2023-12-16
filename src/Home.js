@@ -15,6 +15,12 @@ const Home = () => {
     dispatch(fetchBatteryData());
   }, []);
 
+  /* 
+  state variable decleration 
+  - searched term  
+  - current page
+  */
+
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -22,6 +28,7 @@ const Home = () => {
   const data = batteryData.data;
   //console.log(data);
 
+  // filtering all the fetched data on search
   const filteredData = data.filter(
     (item) =>
       String(item.id).toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -30,6 +37,7 @@ const Home = () => {
       String(item.owner).toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  //Calculating total number pages for pagination bar
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
   const paginatedData = filteredData.slice(
@@ -41,37 +49,45 @@ const Home = () => {
     setCurrentPage(page);
   };
 
+  // Search box handler
   const handleSearch = (value) => {
     // console.log("value: ", value);
     setSearchTerm(value);
   };
 
+  //Loader UI
   if (batteryData.loading) {
     return <Loader />;
   }
-  return (
-    <div className="container">
-      <div className="search-bar">
-        <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
-      </div>
 
-      <div className="table-container">
-        {data.length > 0 && (
-          <BatteryTable
-            className="mytable"
-            data={filteredData}
-            paginatedData={paginatedData}
-          />
-        )}
-        <div className="pagination">
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={changePage}
-          />
+  // Page UI
+  return (
+    <>
+      <div className="container">
+        {/* SearchBar Component */}
+        <div className="search-bar">
+          <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
+        </div>
+
+        {/* Battery Table Component */}
+        <div className="table-container">
+          {data.length > 0 && (
+            <BatteryTable data={filteredData} paginatedData={paginatedData} />
+          )}
+
+          {/* Pagination Component */}
+          <div className="pagination">
+            {
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={changePage}
+              />
+            }
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,7 +1,8 @@
 import React from "react";
 import "../index.css";
 
-const BatteryTable = ({ data, paginatedData }) => {
+// reciving paginatedData max 10 rows per page
+const BatteryTable = ({ paginatedData }) => {
   return (
     <table>
       <thead>
