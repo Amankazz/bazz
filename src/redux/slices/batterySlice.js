@@ -3,10 +3,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchBatteryData = createAsyncThunk(
   "battery/fetchData",
   async () => {
-    const response = await fetch("https://dev.electorq.com/dummy/battery");
-    const batteryData = await response.json();
-    const data = JSON.parse(batteryData.body);
-    return data;
+    try {
+      const response = await fetch("https://dev.electorq.com/dummy/battery");
+      const batteryData = await response.json();
+      const data = JSON.parse(batteryData.body);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
   }
 );
 
